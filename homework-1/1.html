@@ -22,7 +22,40 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  /**
+ * Переводит температуру в градусах цельсия в градусы фаренгейта.
+ * @param {number} temp Температура в градусах цельсия.
+ * @return {number} Результат перевода градусов цельсия в фаренгейты. 
+ */  
+  function celsToFahrenheit(temp) {
+    return (9 / 5) * temp + 32;
+  }
+
+  /**
+  * Проверка входных данных.
+  * @param {number} value Входное значение.
+  * @return {number || string} Возвращаем либо строку, либо результат 
+  * работы функции. 
+  */  
+  function checkValue(value) {
+    if (typeof value === "string") {
+      return 'Нет данных';
+    }
+    return celsToFahrenheit(value).toFixed(1);
+  }
+
+  // const inputValue = +prompt("Введите темепературу в градусах цельсия:");
+  const inputValue = prompt("Введите температуру в градусах цельсия:");
+
+  // parsFloat потому что пользователь может ввести дробные числа
+  const celsTemper = !isNaN(inputValue)
+    ? Number.parseFloat(inputValue)
+    : "Нет данных";
+
+  const fahrTemp = checkValue(celsTemper);
+  
+  alert(`Цельсий: ${celsTemper}, Фаренгейт: ${fahrTemp}`);
+
 </script>
 </body>
 </html>
