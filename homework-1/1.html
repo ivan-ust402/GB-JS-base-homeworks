@@ -39,22 +39,22 @@
   */  
   function checkValue(value) {
     if (typeof value === "string") {
-      return 'Нет данных'
+      return 'Нет данных';
     }
-    return ceilToFahrenheit(value).toFixed(1)
+    return ceilToFahrenheit(value).toFixed(1);
   }
 
   // const inputValue = +prompt("Введите темепературу в градусах цельсия:");
-  const inputValue = prompt("Введите температуру в градусах цельсия:")
+  const inputValue = prompt("Введите температуру в градусах цельсия:");
 
   // parsFloat потому что пользователь может ввести дробные числа
   const celsTemper = !isNaN(inputValue)
     ? Number.parseFloat(inputValue)
     : "Нет данных";
 
-  const fahrTemp = checkValue(celsTemper)
+  const fahrTemp = checkValue(celsTemper);
   
-  alert(`Цельсий: ${celsTemper}, Фаренгейт: ${fahrTemp}`)
+  alert(`Цельсий: ${celsTemper}, Фаренгейт: ${fahrTemp}`);
 
 </script>
 </body>
