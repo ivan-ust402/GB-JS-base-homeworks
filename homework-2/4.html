@@ -31,7 +31,56 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  /**
+   * Функция вычисления разности двух аргументов
+   * @param {number} a Первый параметр функции
+   * @param {number} b Второй параметр функции
+   * @returns {number} Разность переданных аргументов
+  */
+  function getDiff(a, b) {
+    if (a < b) return b - a;
+    return a - b;
+    // return Math.abs(a - b); //еще больше упростим
+  }
+
+    /**
+   * Функция произведения двух аргументов
+   * @param {number} a Первый параметр функции
+   * @param {number} b Второй параметр функции
+   * @returns {number} Произведение переданных аргументов
+  */
+  function getMult(a, b) {
+    return a * b;
+  }
+
+    /**
+   * Функция деления двух аргументов
+   * @param {number} a Первый параметр функции
+   * @param {number} b Второй параметр функции
+   * @returns {number} Деление переданных аргументов
+  */
+  function getDiv(a, b) {
+    return a / b;
+  }
+
+    /**
+   * Функция суммирования двух аргументов
+   * @param {number} a Первый параметр функции
+   * @param {number} b Второй параметр функции
+   * @returns {number} Сумма переданных аргументов
+  */
+  function getSum(a, b) {
+    return a + b;
+  }
+
+  const num1 = +prompt("Введите первое число");
+  const num2 = +prompt("Введите второе число");
+
+  console.log(getSum(num1, num2));
+  console.log(getDiff(num1, num2));
+  console.log(getMult(num1, num2));
+  console.log(getDiv(num1, num2));
+
 </script>
 </body>
 </html>

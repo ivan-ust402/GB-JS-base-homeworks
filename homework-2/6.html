@@ -26,20 +26,38 @@ console.log(declinationOfNumber(5, "стул", "стула", "стульев"));
   "use strict";
 
   function declinationOfNumber(count, one, two, five) {
+    const n10 = Math.abs(count) % 10;
+    const n100 = Math.abs(count) % 100;
+    if (n10 === 1 && n100 !== 11) {
+      return one;
+    } else if (n10 > 1 && n10 < 5 && !(n100 > 10 && n100 < 21)) {
+      return two;
+    } 
+    return five;
+  }
+  
+  let nextIter = true;
+  while(nextIter) {
+    // Число яблок, можно пробовать поставить свое целое, положительное число.
+    const applesNumber = parseInt(prompt("Введите количество (целое положительное число)"));
+    const singleWord = prompt("Введите слово в едиственном числе в именительном падеже");
+    const twoToFourWord = prompt("Введите то же слово в единственном числе в родительном пажеде");
+    const otherWord = prompt("Введите то же слово во множественном числе в родительном пажеде");
+    // Получаем от функции одно из слов "яблоко", "яблока" или "яблок".
+    const word = declinationOfNumber(applesNumber, singleWord, twoToFourWord, otherWord);
+    // Выводим корректную строку, например:
+    // "У меня есть 1 яблоко."
+    // "У меня есть 2 яблока."
+    // "У меня есть 5 яблок."
+    // При любом целом, положительном числе в applesNumber, строка, которая
+    // выводится в console.log, должна иметь правильное склонение слова "яблоко".
+    alert(`У меня есть ${applesNumber} ${word}.`);
 
+    const word1 = declinationOfNumber(applesNumber, "сообщение", "сообщения", "сообщений");
+    alert(`У меня есть ${applesNumber} ${word1}.`);
+    nextIter = confirm("Продолжить?");
   }
 
-  // Число яблок, можно пробовать поставить свое целое, положительное число.
-  const applesNumber = 5;
-  // Получаем от функции одно из слов "яблоко", "яблока" или "яблок".
-  const word = declinationOfNumber(applesNumber, "яблоко", "яблока", "яблок");
-  // Выводим корректную строку, например:
-  // "У меня есть 1 яблоко."
-  // "У меня есть 2 яблока."
-  // "У меня есть 5 яблок."
-  // При любом целом, положительном числе в applesNumber, строка, которая
-  // выводится в console.log, должна иметь правильное склонение слова "яблоко".
-  console.log(`У меня есть ${applesNumber} ${word}.`);
 
 </script>
 </body>
