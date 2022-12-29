@@ -26,20 +26,34 @@ console.log(declinationOfNumber(5, "стул", "стула", "стульев"));
   "use strict";
 
   function declinationOfNumber(count, one, two, five) {
-
+    if (count % 10 === 1) {
+      return one;
+    } else if (count % 10 === 2 || count % 10 === 3 || count % 10 === 4) {
+      return two;
+    } else {
+      return five;
+    }
+  }
+  
+  let nextIter = true;
+  while(nextIter) {
+    // Число яблок, можно пробовать поставить свое целое, положительное число.
+    const applesNumber = parseInt(prompt("Введите количество (целое положительное число)"));
+    const singleWord = prompt("Введите слово в едиственном числе в именительном падеже")
+    const twoToFourWord = prompt("Введите то же слово в единственном числе в родительном пажеде")
+    const otherWord = prompt("Введите то же слово во множественном числе в родительном пажеде")
+    // Получаем от функции одно из слов "яблоко", "яблока" или "яблок".
+    const word = declinationOfNumber(applesNumber, singleWord, twoToFourWord, otherWord);
+    // Выводим корректную строку, например:
+    // "У меня есть 1 яблоко."
+    // "У меня есть 2 яблока."
+    // "У меня есть 5 яблок."
+    // При любом целом, положительном числе в applesNumber, строка, которая
+    // выводится в console.log, должна иметь правильное склонение слова "яблоко".
+    alert(`У меня есть ${applesNumber} ${word}.`);
+    nextIter = confirm("Продолжить?")
   }
 
-  // Число яблок, можно пробовать поставить свое целое, положительное число.
-  const applesNumber = 5;
-  // Получаем от функции одно из слов "яблоко", "яблока" или "яблок".
-  const word = declinationOfNumber(applesNumber, "яблоко", "яблока", "яблок");
-  // Выводим корректную строку, например:
-  // "У меня есть 1 яблоко."
-  // "У меня есть 2 яблока."
-  // "У меня есть 5 яблок."
-  // При любом целом, положительном числе в applesNumber, строка, которая
-  // выводится в console.log, должна иметь правильное склонение слова "яблоко".
-  console.log(`У меня есть ${applesNumber} ${word}.`);
 
 </script>
 </body>
