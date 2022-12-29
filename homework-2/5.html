@@ -74,28 +74,20 @@ Infinity делать не нужно, однако, в случае если б
   }
 
    /**
-   * Функция деления двух аргументов
-   * @param {number} a Первое число
-   * @param {number} b Второе число
-   * @param {string} строка, содержащая символ +, -, /, * 
+   * Вычисляет операцию, которую передали в третий папаметр, между двумя
+   * первыми аргументами
+   * @param {number} arg1 Первое число
+   * @param {number} arg2 Второе число
+   * @param {string} operation строка, содержащая символ +, -, /, * 
    * @returns {number} Результат выполнения функции
   */
   function mathOperation(arg1, arg2, operation) {
     switch(true) {
-      case operation === "+": 
-        return getSum(arg1, arg2);
-        break;
-      case operation === "-": 
-        return getDiff(arg1, arg2);
-        break;
-      case operation === "/": 
-        return getDiv(arg1, arg2);
-        break;
-      case operation === "*": 
-        return getMult(arg1, arg2);
-        break;
-      default: 
-        return NaN;
+      case operation === "+": return getSum(arg1, arg2);
+      case operation === "-": return getDiff(arg1, arg2);
+      case operation === "/": return getDiv(arg1, arg2);
+      case operation === "*": return getMult(arg1, arg2);
+      default: return NaN;
     }
   }
 

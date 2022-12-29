@@ -40,6 +40,7 @@
   function getDiff(a, b) {
     if (a < b) return b - a;
     return a - b;
+    // return Math.abs(a - b); //еще больше упростим
   }
 
     /**
@@ -72,8 +73,8 @@
     return a + b;
   }
 
-  const num1 = parseInt(prompt("Введите первое число"));
-  const num2 = parseInt(prompt("Введите второе число"));
+  const num1 = +prompt("Введите первое число");
+  const num2 = +prompt("Введите второе число");
 
   console.log(getSum(num1, num2));
   console.log(getDiff(num1, num2));
