@@ -44,7 +44,24 @@
     },
   ];
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  // Первая часть задания
+  const hasPhoto = products.filter(product => {
+    return product.photos && product.photos.length !== 0;
+  });
+  console.log(hasPhoto);
+
+  // Вторая часть задания
+  const sortArray = products.sort((a, b) => {
+    if (a.price > b.price) {
+      return 1;
+    }
+    if (a.price < b.price) {
+      return -1;
+    }
+    return 0;
+  })
+
+  console.log(sortArray);
 </script>
 </body>
 </html>
