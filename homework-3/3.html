@@ -33,9 +33,10 @@
     products[i].price = products[i].price - products[i].price * 15 / 100;
   } */
 
-  products.forEach(product => {
-    return product.price = product.price - product.price * 15 / 100;
-  })
+/*   products.forEach(product => {
+    product.price = product.price - product.price * 15 / 100;
+  }) */
+  products.forEach(product => product.price *= .85);
   console.log(products);
 </script>
 </body>
