@@ -29,7 +29,14 @@
     },
   ];
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+/*   for (let i in products) {
+    products[i].price = products[i].price - products[i].price * 15 / 100;
+  } */
+
+  products.forEach(product => {
+    return product.price = product.price - product.price * 15 / 100;
+  })
+  console.log(products);
 </script>
 </body>
 </html>
