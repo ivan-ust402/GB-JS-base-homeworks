@@ -50,7 +50,112 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  // Задание в ES5 синтаксисе
+  function PostES5(authorName, text){
+    this.authorName = authorName;
+    this.text = text;
+    this.lastDate = new Date();
+  }
+
+  PostES5.prototype.edit = function(newText) {
+    this.text = newText;
+    this.lastDate = new Date();
+  }
+
+  function AttachedPostES5(authorName, text) {
+    PostES5.call(this, authorName, text);
+    this.highlighted = false;
+  }
+
+  AttachedPostES5.prototype = Object.create(PostES5.prototype);
+  AttachedPostES5.prototype.constructor = AttachedPostES5;
+
+  AttachedPostES5.prototype.makeTextHighlighted = function () {
+    this.highlighted = true;
+    this.lastDate = new Date();
+  };
+  
+
+  console.dir(AttachedPostES5);
+
+  const simplePost = new PostES5(
+    'Валера', 
+    'Я пришел к тебе с приветом...',
+  )
+  console.log(simplePost);
+  setTimeout(() => {
+    simplePost.edit(
+      'Я пришел к тебе с приветом, рассказать, что солнце встало!'
+    )
+    console.log(simplePost);
+  }, 1000);
+
+  const attachedPostES5 = new AttachedPostES5(
+    'Сергей', 'Сейчас я расскажу увлекательную историю'
+  )
+  console.log(attachedPostES5);
+  setTimeout(() => {
+    attachedPostES5.edit(
+      'Я пришел к тебе с приветом, рассказать, что солнце встало!'
+    )
+    console.log(attachedPostES5);
+  }, 1000);
+  attachedPostES5.makeTextHighlighted();
+
+
+  // Задание в ES6 синтаксисе
+  class PostES6{
+    constructor(authorName, text){
+      this.authorName = authorName;
+      this.text = text;
+      this.lastDate = new Date();
+    }
+
+    edit(newText) {
+      this.text = newText;
+      this.lastDate = new Date();
+    }
+  }
+
+  class AttachedPostES6 extends PostES6 {
+    // constructor(authorName, text){
+    //   super(authorName, text);
+    //   this.highlighted = false;
+    // }
+    // либо
+    highlighted = false;
+    makeTextHighlighted() {
+      this.highlighted = true;
+      this.lastDate = new Date();
+    }
+  }
+
+  
+  console.dir(AttachedPostES6);
+
+  const simplePostES6 = new PostES6(
+    'Антон', 
+    'Текст простого поста',
+  )
+  console.log(simplePostES6);
+  setTimeout(() => {
+    simplePostES6.edit(
+      'Измененный текст простого поста'
+    )
+    console.log(simplePostES6);
+  }, 1000);
+
+  const attachedPostES6 = new AttachedPostES6(
+    'Евгений', 'Пост в закрепе'
+  )
+  console.log(attachedPostES6);
+  setTimeout(() => {
+    attachedPostES6.edit(
+      'Пост в закрепе измененный'
+    )
+    console.log(attachedPostES6);
+  }, 1000);
+  attachedPostES6.makeTextHighlighted();
 </script>
 </body>
 </html>

@@ -31,7 +31,32 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  const inputNumber = +prompt(
+    "Введите целое положительное число в диапазоне от 0 до 1000"
+  );
+  console.dir(getDigitsOfNumber(inputNumber));
+
+  /**
+   * Функция разбиения введенного положительного числа в диапазоне от 0 
+   * до 1000 на единицы, десятки и сотни.
+   * @param {number} num входное значение.
+   * @returns {object} Возвращаем либо пустой объект, либо заполненный объект. 
+  */
+  function getDigitsOfNumber(num) {
+    // if (num % 1 || num < 0 || num > 1000)
+    if (!Number.isInteger(num) || num < 0 || num > 1000) {
+      console.error("Вы ввели невалидное значение!");
+      return {};
+    }
+    const units = num % 10;
+    const dozens = (num - units) / 10 % 10;
+    const hundreds = (num - dozens * 10 - units) / 100 % 10;
+    return {
+      units,
+      dozens,
+      hundreds
+    };
+  }
 </script>
 </body>
 </html>

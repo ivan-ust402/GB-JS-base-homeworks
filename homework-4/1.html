@@ -20,7 +20,36 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  // Продукт на ES5 синтаксисе
+  function ProductES5(name, price) {
+    this.name = name;
+    this.price = price;
+  }
+
+  ProductES5.prototype.make25Discount = function () {
+    this.price *= 0.75; 
+  };
+
+  const goodES5 = new ProductES5('футболка', 1000);
+  goodES5.make25Discount();
+  console.log(goodES5);
+
+  // Продукт на ES6 синтаксисе
+  class ProductES6 {
+    constructor(name, price) {
+      this.name = name;
+      this.price = price;
+    }
+
+    make25Discount () {
+      this.price *= 0.75; 
+    }
+  }
+
+  const goodES6 = new ProductES6('футболка', 1000);
+  goodES6.make25Discount();
+  console.log(goodES6);
+
 </script>
 </body>
 </html>
