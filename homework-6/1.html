@@ -42,17 +42,37 @@
   /*
   1. Установите всем элементам с классом "productName" размер шрифта 24px.
    */
-
+  const nameProducts = document.querySelectorAll('.productName');
+  for (let index = 0; index < nameProducts.length; index++) {
+    nameProducts[index].style.fontSize = '24px';
+  }
 
   /*
   2. Установите всем элементам с классом "product" внешний отступ справа 50px.
    */
-
+  const products = document.querySelectorAll('.product');
+  for (let i = 0; i < products.length; i++) {
+    products[i].style.marginRight = '50px';   
+  }
 
   /*
   3. При клике на кнопку "В корзину" название кнопки должно поменяться на
   "Добавлено" и кнопка должна стать неактивной.
    */
+  document.body.addEventListener('click', event => {
+    const button = event.target;
+    if (button.tagName === 'BUTTON') {
+      button.textContent = 'Добавлено';
+      button.disabled = 'disabled';
+    }
+  })
+
+/*   document.querySelectorAll('button').forEach(el => {
+    el.addEventListener('click', () => {
+      el.textContent = 'Добавлено';
+      el.disabled = true;
+    })
+  }) */
 
 
   /*
@@ -63,13 +83,19 @@
   отображенный товар на странице на созданную копию. У данной копии также
   должен правильно работать код из 3-го задания.
    */
-
+  const productClone = document.querySelector('.product').cloneNode(true);
+  productClone.querySelector('img').src = 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=200:*';
+  productClone.querySelector('.productName').textContent = 'Товар 4'
+  // products[products.length - 1].replaceWith(productClone);
+  document.querySelector('.product:last-of-type').replaceWith(productClone);
 
   /*
   5. По истечении 2 секунд с момента открытия страницы первый товар должен быть
   удален из html.
    */
-
+  setTimeout(() => {
+    document.querySelector('.product:first-of-type').remove();
+  }, 2000);
 
 </script>
 </body>
