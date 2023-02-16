@@ -37,20 +37,72 @@
   1. При наведении на любую из звезд, данной звезде должен ставиться класс
   golden, также такой класс должен ставиться всем звездам до нее слева.
   */
+/*   const starsContainer = document.querySelector('.stars_container');
+  const stars = document.querySelectorAll('i');
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].dataset.index = i;
+  }
 
+  starsContainer.addEventListener('mouseover', event => {
+    const star = event.target;
+    if (star.tagName === 'I') {
+      const count = +star.dataset.index;
+      for (let i = 0; i <= count; i++) {
+        stars[i].classList.add('golden');
+      }
+    }
+  }) */
+
+  //Решение из ответа
+  // Рефакторинг
+  function handler(method) {
+    return event => {
+      if (!event.target.classList.contains('fas')) {
+        return;
+      }
+      for (const star of starEls) {
+        star.classList[method]('golden');
+        if (star === event.target) {
+          break;
+        }        
+      }
+    }
+  }
+
+  const starEls = document.querySelectorAll('.fa-star');
+  const starsContainer = document.querySelector('.stars_container');
+  starsContainer.addEventListener('mouseover', handler('add'));
 
   /*
   2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
   задания должны быть удалены.
    */
+   /* starsContainer.addEventListener('mouseout', event => {
+    if (event.target.tagName === 'I') {
+      stars.forEach(el => {
+        el.classList.remove('golden');
+      })
+    }
+  }) */
 
+    //Решение из ответа
+  starsContainer.addEventListener('mouseout', handler('remove'));
 
   /*
   3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
   звезды (временно могут становиться черными). Почему так? Напишите словами.
   Можем ли мы это исправить? Если да, то предложите решение.
   */
-
+  /*
+  Мигание строк происходит из-за того, что у нас в разметке между 
+  элементами звезд HTML существуют переносы строк, на странице они отображаются пробелами, от этого происходит событие mouseout, что приводит к удалению класса у всех имеющихся элементов и резкое добавление класса при переходе на другую звезду, поэтому нужно удалить данные переносы при помощи js
+   */
+  starsContainer.childNodes.forEach(elem => {
+    if(elem.nodeName === '#text') {
+      elem.remove();
+    }
+  }); 
+  // console.log(starsContainer.childNodes); 
 
 </script>
 </body>
