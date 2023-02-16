@@ -60,12 +60,18 @@
       if (!event.target.classList.contains('fas')) {
         return;
       }
-      for (const star of starEls) {
+/*       for (const star of starEls) {
         star.classList[method]('golden');
         if (star === event.target) {
           break;
         }        
-      }
+      } */
+
+      let star = event.target;
+      do {
+        star.classList[method]('golden');
+        star = star.previousElementSibling;
+      } while (star) 
     }
   }
 
