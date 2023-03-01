@@ -1,0 +1,74 @@
+class Board {
+    constructor() {
+        // Получаем ссылку на таблицу
+        this.boardEl = document.getElementById('game');
+    }
+
+    /**
+     * Метод получает другие игровые объекты, которые нужны ему
+     * для работы
+     * @param {Settings} settings объект настроек.
+     * @param {Snake} snake объект змейки.
+     */
+    init(settings, snake) {
+        this.settings = settings;
+        this.snake = snake;
+    }
+
+    /**
+     * Метод отрисовывает игровое поле
+     */
+    renderBoard() {
+        this.boardEl.innerHTML = '';
+        for (let row = 0; row < this.settings.rowCount; row++) {
+            let tr = document.createElement('tr');
+            this.boardEl.appendChild(tr);
+
+            for (let col = 0; col < this.settings.colsCount; col++) {
+                let td = document.createElement('td');
+                tr.appendChild(td);
+            }
+        }
+    }
+
+    /**
+     * Метод отрисовывает змейку на игровом поле.
+     * */ 
+
+    renderSnake() {
+        const snakeBodyElems = this.getSnakeBodyElems(this.snake.body);
+        if (snakeBodyElems) {
+            snakeBodyElems.forEach(function(tdEl) {
+                tdEl.classList.add('snakeBody');
+            });
+        }
+    }
+
+    /**
+     * Получаем набор тегов td, представляющих тело змейки.
+     * @param {array} bodyCoords - массив объектов с координатами 
+     * @returns {HTMLTableCellElement[]|null} возвращает набор тегов 
+     * td, если были переданы координаты, иначе null. 
+     */
+    getSnakeBodyElems(bodyCoords) {
+        if (bodyCoords.length > 0) {
+            let bodyElems = [];
+            for (let value of bodyCoords) {
+                let elem = this.getCellEl(value.x, value.y);
+                bodyElems.push(elem);
+            }
+            return bodyElems;
+        }
+        return null;
+    }
+
+    /**
+     * Получаем ячейку таблицы.
+     * @param {number} x координата по оси x.
+     * @param {number} y координата по оси y.
+     * @returns {HTMLTableCellElement} тег td.
+     */
+    getCellEl(x, y) {
+        return this.boardEl.querySelector(`tr:nth-child(${y}) td:nth-child(${x})`);
+    }
+}
