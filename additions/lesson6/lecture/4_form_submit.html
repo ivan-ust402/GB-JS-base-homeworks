@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="submit.html" method="post">
+        <input type="text" name="login">
+        <div class="error"></div>
+        <button class="submit">Отправить</button>
+    </form>
+
+    <script>
+        'use strict';
+        // reset - все input очищаются
+
+        const formEl = document.querySelector('form');
+        const inputEl = document.querySelector('input');
+        const errorEl = document.querySelector('.error');
+
+        // Многие ставят обработчик на кнопку "Отправить", так делать не нужно
+        // У формы есть специальное событие отправки формы
+        // Событие submit будет работать всегда, и при клике и при нажатии кнопки Enter
+        formEl.addEventListener('submit', event => {
+            if (inputEl.value.trim() === '') {
+                event.preventDefault();
+                errorEl.textContent = 'Вы ничего не ввели!'
+                console.log('пусто');
+            } 
+        })
+    </script>
+</body>
+</html>

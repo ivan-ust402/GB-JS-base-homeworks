@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вариант записи for</title>
+</head>
+<body>
+    <script>
+        const user = {
+            images: [
+                "1.jpg",
+                "2.svg",
+                "3.gif",
+            ]
+        }
+
+        for (let i = 0; i < user.images.length; i++) {
+            console.log(user.images[i]);            
+        }
+
+        // Автоматом будет переберать итерируемые значения
+        // перебирает названия свойств
+        for (const i in user.images) {
+            console.log(user.images[i]);
+        }
+
+
+        // Автоматом будет переберать итерируемые значения
+        // перебирает значения свойств
+        for (const val of user.images) {
+            console.log(val);
+        }
+
+        // Автоматом будет переберать итерируемые значения
+        // перебирает значения свойств
+        user.images.forEach(function (el, index) {
+            console.log(`Под индексом ${index} лежит значение ${el}`);
+        });
+    </script>
+</body>
+</html>

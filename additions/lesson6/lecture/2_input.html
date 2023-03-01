@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+
+    <script>
+        'use strict';
+/*         // Событие blur возникает когда мы наш фокус убираем с элемента
+        // Фокус можно увести мышкой или tab
+        // не часто используется
+        document
+            .querySelector('input')
+            .addEventListener('blur', () => {
+                console.log('blur');
+            })  */
+        
+        // Событие change возникает когда мы в импуте изменяем значение поля и уводим фокус
+        // если просто увести фокус, то она не сработает
+        // тоже используется нечасто
+/*      document
+            .querySelector('input')
+            .addEventListener('change', () => {
+                console.log('change');
+            })  */
+        // Чаще используется событие input
+        // Он вызывается каждый раз, когда мы что-то печатаем
+        // Используется для валидации
+/*      document
+            .querySelector('input')
+            .addEventListener('input', event => {
+
+                console.log(event.target.value);
+            })  */
+        
+        // Событие фокуса
+        const inputEl = document.querySelector('input');
+        inputEl.addEventListener('focus', event => {
+            //разницы нет, что использовать либо event.target либо переменная содержащая элемент: const input = document.querySelector('input')
+            event.target.style.outline = '3px solid green'; 
+        });
+        inputEl.addEventListener('blur', event => {
+            // event.target.style.outline = 'none';
+            event.target.style.removeProperty('outline');
+        }) 
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Lorem ipsum dolor sit amet.
+    <br>    
+    <textarea></textarea>
+    <script>
+        'use strict';
+
+        // Переопределение стандартных функций
+        // есть событие copy, cut, dbclick
+/*         document.addEventListener('copy', event => {
+            event.preventDefault();
+            // Берем то что выделено на странице
+            const copiedText = document.getSelection().toString()
+            // Перезаписываем свой кастомный буфер обмена
+            event.clipboardData.setData(
+                'text/plain',
+                `${copiedText} - скопировано с сайта такого-то`
+            )
+        }) */
+
+        // Не советуется этим пользоваться, это нетипичное поведение пользователя
+/*         document.addEventListener('dbclick', () => {
+            console.log('123');
+        }) */
+
+        // Необходимо при работе с графиками
+        window.addEventListener('resize', event => {
+            // график перерисовывается
+            // chart.resize();
+            // Размеры окна
+            // console.log(window.innerWidth, window.innerHeight);
+            // document.documentElement - это непосредственно HTML элемент. Это почти тоже самое, что и выше, однако, у window, когда берем размер, мы включаем скролл бар, а у document - чисто окно
+            // тег <meta name="viewport" content="width=device-width, initial-scale=1. - обязателен при работе с кодом представленным ниже, иначе, дойдя до размера 980 счетчик остановится
+            console.log(
+                document.documentElement.clientWidth, 
+                document.documentElement.clientHeight
+            )
+        })
+    </script>
+</body>
+</html>
