@@ -2,8 +2,11 @@
 
 // Ожидаем пока разметка, стили и картинки загрузятся
 window.addEventListener('load', () => {
-    // Создаем объект настроек 
+    // Инициализируем объекты игры 
     const settings = new Settings();
+    const status = new Status();
+    const snake = new Snake();
+
     // Передаем объект настроек
     settings.init({speed: 5, winLength: 5});
 
