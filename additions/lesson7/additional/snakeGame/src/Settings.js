@@ -21,6 +21,7 @@ class Settings {
      */
     init(params) {
         let defaultParams = {rowsCount: 21, colsCount: 21, speed: 2, winLength: 50};
+        // Копирование с заменой
         Object.assign(defaultParams, params);
 
         if (defaultParams.rowsCount < 10 || defaultParams.rowsCount > 30) {
