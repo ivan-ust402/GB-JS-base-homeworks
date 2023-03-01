@@ -20,7 +20,7 @@ class Board {
      */
     renderBoard() {
         this.boardEl.innerHTML = '';
-        for (let row = 0; row < this.settings.rowCount; row++) {
+        for (let row = 0; row < this.settings.rowsCount; row++) {
             let tr = document.createElement('tr');
             this.boardEl.appendChild(tr);
 
@@ -70,5 +70,16 @@ class Board {
      */
     getCellEl(x, y) {
         return this.boardEl.querySelector(`tr:nth-child(${y}) td:nth-child(${x})`);
+    }
+
+    /**
+     * Метод рисует еду на игровом поле.
+     * @param {Food} coords будущее расположение еды на поле
+     * @param {number} coords.x координата x
+     * @param {number} coords.y координата y
+     */
+    renderFood(coords) {
+        const foodCell = this.getCellEl(coords.x, coords.y);
+        foodCell.classList.add('food');
     }
 }

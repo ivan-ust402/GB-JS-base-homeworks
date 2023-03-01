@@ -27,7 +27,7 @@ class Settings {
         if (defaultParams.rowsCount < 10 || defaultParams.rowsCount > 30) {
             throw new Error('Неверные настройки, значение rowsCount должно быть в диапазоне от 10 до 30');
         }
-        this.rowCount = defaultParams.rowsCount;
+        this.rowsCount = defaultParams.rowsCount;
 
         if (defaultParams.colsCount < 10 || defaultParams.colsCount > 30) {
             throw new Error('Неверные настройки, значение colsCount должно быть в диапазоне от 10 до 30');
