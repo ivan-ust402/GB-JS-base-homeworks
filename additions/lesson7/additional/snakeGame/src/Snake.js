@@ -47,4 +47,42 @@ class Snake {
         this.body.unshift(newHeadCoords);
         this.body.pop();
     }
+
+    /**
+     * Метод направления движения.
+     * @param {string} newDirection направление может быть
+     * down, up, left, right: 
+     * @throws {Error} при передаче некорректного направления 
+     * выбрасывается ошибка
+     */
+    changeDirection(newDirection) {
+        if (!this.possibleDirections.includes(newDirection)) {
+            throw new Error('Передано не верное направление. Вы передали: ' + newDirection);
+        }
+        if (this.isPassedOppositeDirection(newDirection)) {
+            return;
+        }
+        this.direction = newDirection;
+    }
+
+    /**
+     * Совпадает ли направление с текущим
+     * @param {string} newDirection 
+     * @returns {boolean} да или нет
+     */
+    isPassedOppositeDirection(newDirection) {
+        if (this.direction == 'down' && newDirection == 'up') {
+            return true;
+        }
+        if (this.direction == 'up' && newDirection == 'down') {
+            return true;
+        }
+        if (this.direction == 'left' && newDirection == 'right') {
+            return true;
+        }
+        if (this.direction == 'right' && newDirection == 'left') {
+            return true;
+        }
+        return false;
+    }
 }
