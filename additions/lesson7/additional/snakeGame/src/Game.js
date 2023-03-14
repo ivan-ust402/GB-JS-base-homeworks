@@ -63,6 +63,10 @@ class Game {
      */
     doTick() {
         this.snake.performStep();
+        if (this.board.isHeadOnFood()) {
+            this.snake.increaseBody();
+            this.food.setNewFood();
+        }
         this.board.clearBoard();
         this.food.setFood();
         this.board.renderSnake();
