@@ -23,4 +23,27 @@ class Game {
         this.menu = menu;
         this.food = food;
     }
+
+    /**
+     * Метод назначает обработчики на события клика на кнопки "Старт",
+     * "Пауза", а также на стрелки на клавиатуре.
+     */
+    run() {
+        this.menu.addButtonsClickListeners(this.start.bind(this), this.pause.bind(this));
+        // document.addEventListener('keydown', this.pressKeyHandler.bind(this));
+    }
+
+    /**
+     * Метод запускает игру.
+     */
+    start() {
+        console.log('start');
+    }
+
+    /**
+     * Метод ставит игру на паузу.
+     */
+    pause() {
+        console.log('pause');
+    }
 }
