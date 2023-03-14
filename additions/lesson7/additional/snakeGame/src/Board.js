@@ -92,4 +92,12 @@ class Board {
             td.className = "";
         });
     }
+
+    /**
+     * Метод проверяет съела ли змейка еду.
+     * @returns {boolean} true, если змейка находится на еде, иначе false.
+     */
+    isHeadOnFood() {
+        return this.boardEl.querySelector('.food').classList.contains('snakeBody');
+    }
 }
