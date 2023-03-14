@@ -63,5 +63,8 @@ class Game {
      */
     doTick() {
         this.snake.performStep();
+        this.board.clearBoard();
+        this.food.setFood();
+        this.board.renderSnake();
     }
 }
