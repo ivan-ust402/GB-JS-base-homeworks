@@ -62,6 +62,6 @@ class Game {
      * 4. заново отрисовывает положение змейки и еды
      */
     doTick() {
-        
+        this.snake.performStep();
     }
 }
