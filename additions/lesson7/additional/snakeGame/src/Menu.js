@@ -1,7 +1,7 @@
 class Menu {
     constructor() {
         this.startBtnEl = document.getElementById('startBtn');
-        this.pauseBtnEl = documentById('pauseBtn');
+        this.pauseBtnEl = document.getElementById('pauseBtn');
     }
 
     /**
