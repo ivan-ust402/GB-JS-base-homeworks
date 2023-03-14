@@ -63,6 +63,9 @@ class Game {
      */
     doTick() {
         this.snake.performStep();
+        if (this.isGameLost()) {
+            return;
+        }
         if (this.board.isHeadOnFood()) {
             this.snake.increaseBody();
             this.food.setNewFood();
@@ -92,5 +95,28 @@ class Game {
                 this.snake.changeDirection('right');
                 break;
         }
+    }
+
+    /**
+     * Метод проверяет проиграна ли игра, останавливает игру в случае
+     * проигрыша, выводит сообщение о проигрыше.
+     * @returns {boolean} если мы шагнули в стену, тогда true, 
+     * иначе false.
+     */
+    isGameLost() {
+        if (this.board.isNextStepToWall(this.snake.body[0])) {
+            clearInterval(this.tickIdentifier);
+            this.setMessage('Вы проиграли');
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Метод выводит сообщение на странице.
+     * @param {string} text 
+     */
+    setMessage(text) {
+        this.messageEl.innerText = text;
     }
 }
