@@ -38,13 +38,30 @@ class Game {
      * Метод запускает игру.
      */
     start() {
-        console.log('start');
+        if (this.status.isPaused()) {
+            this.status.setPlaying();
+            this.tickIdentifier = setInterval(this.doTick.bind(this), 1000 / this.settings.speed)
+        }
     }
 
     /**
      * Метод ставит игру на паузу.
      */
     pause() {
-        console.log('pause');
+        if (this.status.isPlaying()) {
+            this.status.setPaused();
+            clearInterval(this.tickIdentifier);
+        }
+    }
+
+    /**
+     * Этот метод запускается каждую секунду и осуществляет:
+     * 1. перемещение змейки
+     * 2. проверяет проиграна/выиграна ли игра
+     * 3. увеличивает размер змейки, если она ест еду
+     * 4. заново отрисовывает положение змейки и еды
+     */
+    doTick() {
+        
     }
 }
