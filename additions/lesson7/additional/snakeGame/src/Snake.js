@@ -85,4 +85,20 @@ class Snake {
         }
         return false;
     }
+
+    /**
+     * Метод дублирует в массиве объектов, представляющих тело змейки, 
+     * последнюю ячейку, т.е. в массиве в конце оказываются два 
+     * одинаковых объекта. Когда метод performStep в самом конце удаляет 
+     * последний элемент массива, он удаляет сдублированный объект,
+     * т.о. тело змейки растет.
+     */
+    increaseBody() {
+        let bodyLastCell = this.body[this.body.length - 1];
+        let newBodyLastCell = {
+            x: bodyLastCell.x,
+            y: bodyLastCell.y,
+        };
+        this.body.push(newBodyLastCell);
+    }
 }
