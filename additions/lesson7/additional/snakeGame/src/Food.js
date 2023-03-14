@@ -17,6 +17,10 @@ class Food {
         this.board = board;
     }
 
+    setFood() {
+        this.board.renderFood(this);
+    }
+
     /**
      * Метод устанавливает новое случайное положение еды на игровом 
      * поле
