@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
     const status = new Status();
     const snake = new Snake();
     const board = new Board();
-
+    const menu = new Menu();
     const food = new Food();
     const game = new Game();
 
@@ -23,4 +23,5 @@ window.addEventListener('load', () => {
     board.renderSnake();
     // Устанавливаем еду
     food.setNewFood();
+    game.run();
 });
