@@ -31,7 +31,7 @@ class Game {
      */
     run() {
         this.menu.addButtonsClickListeners(this.start.bind(this), this.pause.bind(this));
-        // document.addEventListener('keydown', this.pressKeyHandler.bind(this));
+        document.addEventListener('keydown', this.pressKeyHandler.bind(this));
     }
 
     /**
@@ -66,5 +66,27 @@ class Game {
         this.board.clearBoard();
         this.food.setFood();
         this.board.renderSnake();
+    }
+
+    /**
+     * В зависимости от нажатой кнопки (вверх, вниз влево, вправо)
+     * будет вызываться соответствующий метод.
+     * @param {KeyboardEvent} event
+     */
+    pressKeyHandler(event) {
+        switch (event.key) {
+            case "ArrowUp":
+                this.snake.changeDirection('up');
+                break;
+            case "ArrowDown":
+                this.snake.changeDirection('down');
+                break;
+            case "ArrowLeft":
+                this.snake.changeDirection('left');                       
+                break;
+            case "ArrowRight":
+                this.snake.changeDirection('right');
+                break;
+        }
     }
 }
