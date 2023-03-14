@@ -82,4 +82,14 @@ class Board {
         const foodCell = this.getCellEl(coords.x, coords.y);
         foodCell.classList.add('food');
     }
+
+    /**
+     * Метод очищения игрового поля
+     */
+    clearBoard() {
+        const tdElems = document.querySelectorAll('td');
+        tdElems.forEach(function(td) {
+            td.className = "";
+        });
+    }
 }
