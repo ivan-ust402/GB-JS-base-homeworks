@@ -33,7 +33,7 @@ class Status {
      * Проверка состояния: На паузе
      * @returns если сейчас игра на паузе, тогда true, иначе false
      */
-        isPaused() {
-            return this.condition === 'paused';
-        }
+    isPaused() {
+        return this.condition === 'paused';
+    }
 }

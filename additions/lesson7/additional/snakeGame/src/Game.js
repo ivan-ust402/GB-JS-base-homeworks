@@ -15,14 +15,16 @@ class Game {
      * @param {Snake} snake 
      * @param {Menu} menu 
      * @param {Food} food 
+     * @param {Score} score
      */
-    init(settings, status, board, snake, menu, food) {
+    init(settings, status, board, snake, menu, food, score) {
         this.settings = settings;
         this.status = status;
         this.board = board;
         this.snake = snake;
         this.menu = menu;
         this.food = food;
+        this.score = score;
     }
 
     /**
@@ -30,6 +32,7 @@ class Game {
      * "Пауза", а также на стрелки на клавиатуре.
      */
     run() {
+        this.score.setToWin(this.settings.winLength);
         this.menu.addButtonsClickListeners(this.start.bind(this), this.pause.bind(this));
         document.addEventListener('keydown', this.pressKeyHandler.bind(this));
     }
@@ -63,6 +66,7 @@ class Game {
      */
     doTick() {
         this.snake.performStep();
+        this.score.setCurrent(this.snake.body.length);
         if (this.isGameLost()) {
             return;
         }
