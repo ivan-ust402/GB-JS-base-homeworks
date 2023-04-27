@@ -67,7 +67,10 @@ class Game {
     doTick() {
         this.snake.performStep();
         this.score.setCurrent(this.snake.body.length);
-        if (this.isGameLost()) {
+        // if (this.isGameLost()) {
+        //     return;
+        // }
+        if (this.isSnakeSteppedOntoItself()) {
             return;
         }
         if (this.isGameWon()) {
@@ -104,7 +107,8 @@ class Game {
         }
     }
 
-    /**
+    /** 
+     * @deprecated МЕТОД УСТАРЕЛ, т.к. змейка теперь может проходить сквозь стены
      * Метод проверяет проиграна ли игра, останавливает игру в случае
      * проигрыша, выводит сообщение о проигрыше.
      * @returns {boolean} если мы шагнули в стену, тогда true, 
@@ -112,6 +116,35 @@ class Game {
      */
     isGameLost() {
         if (this.board.isNextStepToWall(this.snake.body[0])) {
+            clearInterval(this.tickIdentifier);
+            this.setMessage('Вы проиграли');
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Метод проверяет съела ли змейка сама себя.
+     * @returns {boolean}
+     */
+    isSnakeSteppedOntoItself() {
+        /*
+        [
+            {x: 1, y: 1}
+            {x: 1, y: 2}
+            {x: 1, y: 3}
+        ]
+        =>
+        [
+            "11", "12", "13"
+        ]
+        */
+        let cellArr = this.snake.body.map(function (cellCoords) {
+            return cellCoords.x.toString() + cellCoords.y.toString();
+        })
+
+        let head = cellArr.shift();
+        if (cellArr.includes(head)) {
             clearInterval(this.tickIdentifier);
             this.setMessage('Вы проиграли');
             return true;

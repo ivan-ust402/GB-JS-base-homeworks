@@ -66,8 +66,8 @@ class Snake {
             newHeadCoords.x = this.settings.colsCount;
         }
         // Если голова уходит за верхний край
-        if (newHeadCoords.x == 0) {
-            newHeadCoords.x = this.settings.rowsCount;
+        if (newHeadCoords.y == 0) {
+            newHeadCoords.y = this.settings.rowsCount;
         }
 
         this.body.unshift(newHeadCoords);
