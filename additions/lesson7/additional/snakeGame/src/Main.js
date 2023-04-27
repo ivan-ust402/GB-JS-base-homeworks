@@ -13,11 +13,12 @@ window.addEventListener('load', () => {
     const score = new Score;
 
     // Настройки
-    settings.init({speed: 5, winLength: 5});
+    settings.init({speed: 5, winLength: 30});
     board.init(settings, snake);
     food.init(settings, snake, board);
     game.init(settings, status, board, snake, menu, food, score);
     score.init(settings);
+    snake.init(settings);
 
     // Рисуем игровое поле
     board.renderBoard();
