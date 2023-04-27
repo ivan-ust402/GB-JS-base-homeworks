@@ -60,6 +60,23 @@
     H99: "Однако, программирование, в итоге, принесет свои плоды.",
   };
 
+  const textContent = document.querySelector('.text');
+
+  addEventListener('click', (event) => {
+    if (
+      event.target.classList.contains('nav-link')
+      && !event.target.classList.contains('active')
+    ) {
+      document.querySelectorAll('.nav-link').forEach(el => {
+        el.classList.remove('active')
+      });
+      event.target.classList.add('active');
+      const nameOfKey = event.target.parentNode.dataset.text;
+      textContent.textContent = panelText[nameOfKey];
+    };
+  })
+
+
 
   /*
   2. Необходимо сделать так, чтобы при изменении input'а менялся и размер шрифта
