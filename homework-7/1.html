@@ -86,9 +86,13 @@
    */
   const input = document.querySelector('input');
   const inputDiv = document.querySelector('#inputDiv');
-  inputDiv.style.fontSize = input.value + 'px';
+  const defaultFontSizeString = getComputedStyle(inputDiv).fontSize;
+  const defaultFontSize = defaultFontSizeString.replace(/[^0-9]/g, "");
+  const inputValue = input.value;
+  const diff = inputValue / defaultFontSize;
+  
   input.addEventListener('input', () => {
-    inputDiv.style.fontSize = input.value + 'px';
+    inputDiv.style.fontSize = input.value / diff + 'px';
   })
 
 
