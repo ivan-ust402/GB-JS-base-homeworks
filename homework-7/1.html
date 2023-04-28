@@ -84,6 +84,12 @@
   шрифт у текста, никакого резкого увеличения шрифта не должно быть при
   перетаскивании ползунка.
    */
+  const input = document.querySelector('input');
+  const inputDiv = document.querySelector('#inputDiv');
+  inputDiv.style.fontSize = input.value + 'px';
+  input.addEventListener('input', () => {
+    inputDiv.style.fontSize = input.value + 'px';
+  })
 
 
 </script>
