@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson8</title>
+</head>
+<body>
+    <h1>This. Анонимные функции. Замыкания.</h1>
+
+    <button>Кнопка</button>
+    <script>
+        'use strict';
+        // ### 1 ###
+        // setTimeout и SetInterval устанавливают контекст свой в передаваемые функции
+        const user = {
+            userName: 'Alex',
+            sayThis() {
+                console.log(this);
+            },
+        };
+
+        setTimeout(user.sayThis, 1000); // window
+        setTimeout(function() {user.sayThis();}, 1000); // user - посылаем шаблон setTimeout
+        setTimeout(() => {user.sayThis();}, 1000); // user
+        setTimeout(user.sayThis.bind(user), 1000); // user
+
+        // Другой пример запись метода разными способами в объекте как будет себя вести
+        const user1 = {
+            userName: 'Alex',
+            sayUsual() {
+                setTimeout(function() {
+                    console.log(this.userName);
+                }, 1000);
+            },
+            sayArrow() {
+                setTimeout(() => {
+                    console.log(this.userName)
+                }, 2000);
+            }
+        };
+
+        user1.sayArrow(); //Alex, потому что контест стрелочной функции присваивается в момент создания стрелочной функции и изменить его нельзя, здесь же setTimeout не изменит контекст, потому что данная стрелочная функция была создана в контексте объекта
+        user1.sayUsual(); //undefined, а контекст анонимной функции присваивается в момент ее исполнения, в данном случае эта функция вызывается в контексте setTimeout и контекст будет другой в итоге undefined
+
+        // Как ведет себя в классах
+        class Hello {
+            constructor(a) {
+                this.a = a;
+            }
+
+            asd = () => { 
+                //Функция лежит внутри объекта, а не в прототипе 
+                // Это связано как раз с формой записи функции в классе
+                // если ты что-то присваиваешь в конструкторе или в 
+                // самом классе, это что-то не будет лежать в прототипе,
+                // оно будет лежать в самом классе
+                console.log(this);  //В this будет тот самый объект,
+                                    //  который ты создавал
+            }
+
+            awd() { // данная запись экономнее по ресурсам
+                // Данная функция лежит в прототипе, балгодаря такой 
+                // форме записи
+                console.log(this);
+            }
+
+            // Разница в том, что функция, лежащая в прототипе, не будет дублироваться при создании новых экземпляров класса, она будет создана один раз в прототипе. А если бы функция лежала в классе, то она бы создавалась каждый раз в каждом новом экземпляре класса
+
+        }
+
+        const hello = new Hello(123);
+
+        // Работа с кнопкой
+/*         const button = document.querySelector('button');
+        button.addEventListener('click', function() {
+            console.log(this); //Это будет сама кнопка
+        }) 
+*/
+        class User1 {
+            constructor(userName) {
+                this.userName = userName;
+            }
+            /**
+             * метод будет получать кнопку и вешать обработчик события
+             * 
+             * 
+            */
+            init() { 
+                const btnEl = document.querySelector('button');
+                // this === тэг button (this слева от точки), username === unsefined
+
+                // btnEl.addEventListener('click', this.sayThis); 
+
+                // this === тэг button (this слева от точки), 
+                // username === unsefined, при вызове ананимной 
+                // функции ей присвоится контекст опять же объекта 
+                // стоящего слева от точки, не забываем, что у таких 
+                // функций контекст переписывается при вызове
+
+                // btnEl.addEventListener('click', function() {
+                //     this.sayThis(); // и в this опять будет кнопка
+                // }); 
+
+                // Т.к. в этом примере используется стрелочная функция,
+                // а контекст стрелочной функции присваивается в 
+                // момент ее создания, то данная запись отработает 
+                // корректно 
+
+                // btnEl.addEventListener('click', () => {this.sayThis()});
+
+                // Тоже отработает корректно, потому что bind 
+                // возвращает нам новую функцию и устанавливает в нее 
+                // нужный нам контекст
+
+                // btnEl.addEventListener('click', this.sayThis.bind(this));
+                // как делали раньше, когда не было стрелочных функций и bind
+                // var _this = this;
+                // btnEl.addEventListener('click', function() {
+                //     _this.sayThis();
+                // })
+
+                // когда функция лежит не в прототипе, а в экземпляре класса
+                btnEl.addEventListener('click', this.sayThis1);
+
+            }
+
+            sayThis() {
+                console.log(this.userName);
+            }
+
+            sayThis1 = () => { // если эту функцию переписать как стрелочную, то ее можно смело передавать в другой метод не задумываясь о контексте, т.к. данная функция будет создаваться в каждом экземпляре класса и у нее всегда будет определен this данного экземпляра
+
+                // Для функций обработчиков событий можно их прописывать в таком виде, т.к. нет разницы будешь ты создавать ее здесь или же новую стрелочную функцию в методе где используется этот обработчик
+                console.log(this.userName);
+            }
+        }
+
+        const user3 = new User1('Иван');
+        user3.init();
+
+        // ## 2 ##
+        // IIFE (устаревшая конструкция)- это выражение функции, которая вызывается тут же на месте
+        (function() {
+            console.log('hello');
+        })();
+
+        // применялась при параллелной разработке двух программистов одного метода,
+        // создавалась для того чтобы изолировать одинаковые названия переменных друг от друга
+
+        (function() {
+            // переменная a заперта внутри функций, вне этих функций переменных a не существует
+            const a = 5;
+            console.log(a);
+            // чтобы передать данную переменную во вне используем объект window
+            window.a = a;
+        })();
+
+        (function() {
+            const a = 100;
+            console.log(a);
+            console.log('window.a =', window.a);
+        })();
+
+        console.log('window.a =', window.a);
+
+        // ## 3 ##
+        // Замыкание это когда функция замыкает переменную на себя и не дает ей удалиться
+
+        function getNameReporter() {
+            // если переменная не замкнута, т.е. из функции не возвращается функция, после выполнения функции переменная удаляется
+            // но в нашем случае, первая функция возвращает другую функцию, в которой эта переменная используется, тем самым, после завершения работы первой функции переменная не удаляется(замыкается)
+            const name = 'John';
+
+            function sayName() {
+                console.log(name);
+            }
+
+            return sayName;
+        }
+
+        const showName = getNameReporter();
+        showName();
+
+
+        // ## GAME ##
+        function game() {
+            let color = 'black';
+            const availableColors = ['black', 'pink', 'grey', 'brown'];
+            let score = 0;
+
+            function getColor() {
+                return color;
+            }
+
+            function isCorrectColor(color) {
+                return availableColors.includes(color);
+            }
+
+            function changeColor(newColor) {
+                if (!isCorrectColor(newColor)) {
+                    throw Error('Некорректный цвет!');
+                }
+
+                color = newColor;
+            }
+
+            function getScore() {
+                return score;
+            }
+
+            function incScore() {
+                score++;
+            }
+
+            return {
+                getColor, //getColor: getColor
+                changeColor,
+                getScore,
+                incScore,
+            };
+        }
+
+        const myGame = game();
+
+        // Скрываем ненужные для другого программиста функции и переменные
+        // Выдаем только необходимый функционал
+
+        // В КЛАССАХ
+        class User4 {
+            #name; //приватное свойство
+            constructor(name) {
+                this.#name = name;
+            }
+            sayName() {
+                console.log(this.#name);
+            }
+        }
+
+        const user4 = new User4('Иван'); //данное имя никак нельзя поменять
+        console.log("user4.name", user4.name); //нет доступа
+
+    </script>
+</body>
+</html>
