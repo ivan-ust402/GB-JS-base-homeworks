@@ -24,8 +24,38 @@ itemsBlock.addEventListener('click', event => {
 })
 
 function addInfoToBucketBlock(bucketObj) {
-    console.log(content);
+    const bucketContentRowEl = document.createElement('div');
+    bucketContentRowEl.classList.add('mycart-content__row'); 
+    bucketContentRowEl.classList.add('find-row'); 
+    const  bucketContentHeaderRowEl = document.querySelector('.mycart-content__header');
+    const totalSumEl = document.querySelector('.mycart-content__total-value');
+    // const findExistRowEl = document.querySelector('.find-row');
+    // console.log(findExistRowEl);
+    // if (!findExistRowEl.length) {
+    //     findExistRowEl.parentNode.removeChild(findExistRowEl);
+    // }
+    const findRows = content.querySelectorAll('.find-row');
+    if(findRows.length !== 0) {
+        findRows.forEach(el => {
+            el.remove();
+        })
+    }
+    let sum = 0;
+    let stringHTML = '';
     
+    for (const key in bucketObj) {
+        stringHTML += `
+        <div>${bucketObj[key].name}</div>
+        <div>${bucketObj[key].count} шт.</div>
+        <div>$${bucketObj[key].price}</div>
+        <div>$${bucketObj[key].price * bucketObj[key].count}</div>
+        `
+        bucketContentRowEl.innerHTML = stringHTML;
+        bucketContentHeaderRowEl.insertAdjacentElement('afterend', bucketContentRowEl);
+        sum += bucketObj[key].price * bucketObj[key].count;
+    }
+    totalSumEl.innerHTML = sum;
+
 }
 
 function addCountToBucketIcon(bucketObj) {
@@ -68,6 +98,10 @@ function addToCart(targetObject, addObject) {
                 targetObject[keyNumber] = {...addObject, count: 1};
             }
         }
-        console.log(targetObject);
+        // console.log(targetObject);
 } 
+
+function removeFromCart(targetObject, removeObj) {
+    
+}
 
