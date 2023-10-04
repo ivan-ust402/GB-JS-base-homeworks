@@ -1,3 +1,5 @@
 video.mp4
 node_modules
 dist
+*.scss
+*.css.map
