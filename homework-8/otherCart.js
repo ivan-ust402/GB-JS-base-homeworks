@@ -35,7 +35,7 @@ document.querySelector('.items__block').addEventListener('click', event => {
     
     // Добавляем продукт в корзину
     addToCart(id, name, price);
-
+    console.log(basket);
 });
 
 /**
@@ -88,7 +88,6 @@ function renderProductInBasket(id) {
     // был ли такой продукт вставлен до 
     const basketRowEl = basketWindowEl
         .querySelector(`.mycart-content__row[data-productId="${id}"]`);
-        console.log(basketWindowEl)
     if (!basketRowEl) {
         renderNewProductInBasket(id);
         return;
@@ -124,4 +123,33 @@ function renderNewProductInBasket(productId) {
         </div>
     `;
     basketTotalEl.insertAdjacentHTML('beforebegin', productRow);
+}
+
+// #### Реализуем возможность удаления товара из корзины
+// Установим обработчик события на окно корзины и отловим клики на 
+// кнопку удалить
+document.querySelector('.mycart-content').addEventListener('click', event => {
+    if (!event.target.closest('.mycart-content__removebtn')) {
+        return;
+    }
+    // находим продукт по которому кликнули и забираем у него id
+    const product = event.target.closest('.basketRow');
+    const id = product.dataset.productid;
+    removeProductFromCart(id);
+    console.log(basket);
+})
+
+function removeProductFromCart(id) {
+    // Удаляем поле продукта из объекта корзины
+    delete basket[id];
+    // Удаляем из разметки необходимый блок
+    basketWindowEl.querySelector(`.mycart-content__row[data-productId="${id}"]`).remove();
+    // Пересчитываем итоговую цену и ререндерим
+    basketTotalValueEl.textContent = getTotalBasketPrice();
+    // Пересчитываем количество товаров и перерендериваем
+    basketCounterEl.textContent = getTotalBasketCount().toString();
+    // Если корзина пуста скрываем отображение количества товаров
+    if(!getTotalBasketCount()) {
+        basketCounterEl.classList.add('hidden');
+    }
 }
