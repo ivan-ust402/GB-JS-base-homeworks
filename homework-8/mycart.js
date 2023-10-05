@@ -1,8 +1,11 @@
+// Мой вариант решения
+
 const cart = document.querySelector('.mycart');
 const content = document.querySelector('.mycart-content');
 const itemsBlock = document.querySelector('.items__block');
 const goodsInBacket = {};
 
+// Вешаем обработчик события клик на иконку корзины
 cart.addEventListener('click', () => {
     if(content.classList.contains('hidden')) {
         content.classList.remove('hidden');
@@ -11,6 +14,7 @@ cart.addEventListener('click', () => {
     }
 });
 
+// Вешаем обработчик события клик на блок, содержащий все товары
 itemsBlock.addEventListener('click', event => {  
     if( 
         event.target.classList.contains('item__button')
@@ -23,6 +27,12 @@ itemsBlock.addEventListener('click', event => {
     }
 })
 
+/**
+ * Функция добавления товара в корзину
+ * Выполняет ререндеринг и рендеринг товаров в блок корзины
+ * 
+ * @param {Object} bucketObj 
+ */
 function addInfoToBucketBlock(bucketObj) {
     const bucketContentRowEl = document.createElement('div');
     bucketContentRowEl.classList.add('mycart-content__row'); 
@@ -57,7 +67,11 @@ function addInfoToBucketBlock(bucketObj) {
     totalSumEl.innerHTML = sum;
 
 }
-
+/**
+ * Функция подсчета позиций товаров в корзине и отрисовка 
+ * на странице их количества 
+ * @param {Object} bucketObj 
+ */
 function addCountToBucketIcon(bucketObj) {
     const goodsCount = document.querySelector('.mycart__count');
     if (Object.keys(bucketObj).length !== 0) {
@@ -66,6 +80,13 @@ function addCountToBucketIcon(bucketObj) {
     }
 }
 
+/**
+ * Функция поиска ближайшего родителя с переданным в
+ * виде строки классом
+ * @param {HTMLElement} el 
+ * @param {string} findClass 
+ * @returns 
+ */
 function findParentNodebyClass(el, findClass) {
     const parent = el.parentNode;
     const contains = parent.classList.contains(findClass);
@@ -79,6 +100,11 @@ function findParentNodebyClass(el, findClass) {
     }
 }
 
+/**
+ * Функция добавления нового объекта в общий объект
+ * @param {Object} targetObject 
+ * @param {Object} addObject 
+ */
 function addToCart(targetObject, addObject) {
         const isEmpty = Object.keys(targetObject).length === 0 ? true: false;
         const keyNumber = Object.keys(targetObject).length;
@@ -101,7 +127,4 @@ function addToCart(targetObject, addObject) {
         // console.log(targetObject);
 } 
 
-function removeFromCart(targetObject, removeObj) {
-    
-}
 
