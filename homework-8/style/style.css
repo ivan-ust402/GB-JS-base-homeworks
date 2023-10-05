@@ -1052,7 +1052,7 @@ summary::-webkit-details-marker {
 
 .mycart-content {
   position: absolute;
-  z-index: 3;
+  z-index: 100;
   top: 52px;
   right: 0px;
   background-color: #FFF;
@@ -1062,6 +1062,7 @@ summary::-webkit-details-marker {
   font-size: 14px;
 }
 .mycart-content__row {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
@@ -1075,6 +1076,19 @@ summary::-webkit-details-marker {
 .mycart-content__total {
   font-weight: bold;
   text-align: right;
+}
+.mycart-content__removebtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: inherit;
+  border: none;
+}
+.mycart-content__removebtn:hover {
+  cursor: pointer;
+}
+.mycart-content__removebtn:hover svg {
+  fill: #F16D7F;
 }
 
 .hidden {
